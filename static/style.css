@@ -1,0 +1,164 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5fb;
+    color: #243247;
+    line-height: 1.6;
+}
+
+header {
+    background: #1557a6;
+    color: white;
+    text-align: center;
+    padding: 24px 16px;
+}
+
+header h1 {
+    margin-top: 0;
+}
+
+header a {
+    color: white;
+    margin: 8px;
+}
+
+.card {
+    background: white;
+    max-width: 620px;
+    margin: 28px auto;
+    padding: 26px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px #00000012;
+}
+
+.wide {
+    max-width: 1100px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+button {
+    background: #1557a6;
+    color: white;
+    border: 0;
+    border-radius: 6px;
+    padding: 11px 16px;
+    margin-top: 16px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background: #0d407f;
+}
+
+.danger {
+    background: #b42318;
+    margin: 0;
+}
+
+.danger:hover {
+    background: #8f1c13;
+}
+
+.success {
+    color: #176b37;
+    background: #e0f5e7;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.error {
+    color: #a51f1f;
+    background: #fde8e8;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.notice {
+    background: #e7f0ff;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.message {
+    max-width: 620px;
+    margin: 20px auto;
+}
+
+.hint {
+    color: #64748b;
+    font-size: 13px;
+}
+
+a {
+    color: #1557a6;
+}
+
+.card > a {
+    display: inline-block;
+    margin-top: 16px;
+}
+
+.inline-form {
+    display: inline-block;
+}
+
+.inline-form button {
+    background: #ffffff;
+    color: #1557a6;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+th, td {
+    border: 1px solid #d8e0eb;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background: #e7f0ff;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+}
+
+@media (max-width: 700px) {
+    .card {
+        margin: 16px 10px;
+        padding: 18px;
+    }
+
+    .message {
+        margin: 16px 10px;
+    }
+}

@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Digital Certificate Verification</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>Digital Certificate Verification System</h1>
+    <p>Secure student certificate verification portal</p>
+</header>
+
+<main class="card">
+    <h2>Verify a Certificate</h2>
+    <p>Enter the unique certificate ID to check its status.</p>
+
+    <form action="{{ url_for('verify') }}" method="POST">
+        <input type="hidden" name="csrf_token"
+               value="{{ csrf_token() }}">
+        <label for="certificate_id">Certificate ID</label>
+        <input id="certificate_id" name="certificate_id"
+               maxlength="80" required
+               placeholder="e.g. CERT-2026-ABC12345">
+        <button type="submit">Verify Certificate</button>
+    </form>
+
+    <a href="{{ url_for('admin_login') }}">Administrator Login</a>
+</main>
+
+<footer>STE Academic Project</footer>
+</body>
+</html>

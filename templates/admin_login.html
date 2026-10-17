@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Administrator Login</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="card">
+    <h1>Administrator Login</h1>
+
+    {% for message in get_flashed_messages() %}
+        <p class="notice">{{ message }}</p>
+    {% endfor %}
+
+    <form method="POST">
+        <input type="hidden" name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <label for="username">Username</label>
+        <input id="username" name="username"
+               autocomplete="username" required>
+
+        <label for="password">Password</label>
+        <input id="password" name="password"
+               type="password"
+               autocomplete="current-password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p class="hint">
+        Demo username: admin<br>
+        Demo password: admin123
+    </p>
+
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</main>
+</body>
+</html>

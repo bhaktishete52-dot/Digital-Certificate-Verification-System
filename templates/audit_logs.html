@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Security Audit Logs</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="card wide">
+    <h1>Security Audit Logs</h1>
+    <p>Records of administrative activity.</p>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Log ID</th>
+                    <th>Administrator</th>
+                    <th>Action</th>
+                    <th>Certificate ID</th>
+                    <th>Timestamp (UTC)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log['log_id'] }}</td>
+                    <td>{{ log['username'] or 'Unknown' }}</td>
+                    <td>{{ log['action'] }}</td>
+                    <td>{{ log['certificate_id'] or '-' }}</td>
+                    <td>{{ log['timestamp'] }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">No audit events recorded.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</main>
+</body>
+</html>

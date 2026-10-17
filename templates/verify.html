@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Certificate Verification Result</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="card">
+    <h1>Verification Result</h1>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+
+    {% elif certificate %}
+        {% if certificate['status'] == 'ACTIVE' %}
+            <p class="success">Active certificate record found</p>
+        {% else %}
+            <p class="error">Certificate REVOKED</p>
+        {% endif %}
+
+        <h2>Certificate Details</h2>
+        <p><strong>Certificate ID:</strong>
+            {{ certificate['certificate_id'] }}</p>
+        <p><strong>Student:</strong>
+            {{ certificate['student_name'] }}</p>
+        <p><strong>Course:</strong>
+            {{ certificate['course'] }}</p>
+        <p><strong>Issue Date:</strong>
+            {{ certificate['issue_date'] }}</p>
+        <p><strong>Status:</strong>
+            {{ certificate['status'] }}</p>
+
+        <p class="hint">
+            This result checks the issuer's database record.
+            It is not an independent cryptographic signature check.
+        </p>
+
+    {% elif searched %}
+        <p class="error">Certificate not found.</p>
+        <p>Check the ID or contact the issuing institution.</p>
+    {% endif %}
+
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</main>
+</body>
+</html>

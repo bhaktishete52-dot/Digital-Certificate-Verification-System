@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, {{ session['username'] }}</p>
+    <a href="{{ url_for('audit_logs') }}">View Audit Logs</a>
+
+    <form action="{{ url_for('admin_logout') }}" method="POST"
+          class="inline-form">
+        <input type="hidden" name="csrf_token"
+               value="{{ csrf_token() }}">
+        <button type="submit">Logout</button>
+    </form>
+</header>
+
+{% for message in get_flashed_messages() %}
+    <p class="notice message">{{ message }}</p>
+{% endfor %}
+
+<main class="card">
+    <h2>Issue New Certificate</h2>
+
+    <form action="{{ url_for('add_certificate') }}" method="POST">
+        <input type="hidden" name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <label for="student_name">Student Name</label>
+        <input id="student_name" name="student_name"
+               maxlength="100" required>
+
+        <label for="course">Course / Qualification</label>
+        <input id="course" name="course"
+               maxlength="120" required>
+
+        <label for="issue_date">Issue Date</label>
+        <input id="issue_date" name="issue_date"
+               type="date" max="{{ '' }}" required>
+
+        <button type="submit">Issue Certificate</button>
+    </form>
+
+    <p class="hint">
+        The system generates a unique certificate ID automatically.
+    </p>
+</main>
+
+<main class="card wide">
+    <h2>Certificate Records</h2>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Certificate ID</th>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Issue Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in certificates %}
+                <tr>
+                    <td>{{ c['certificate_id'] }}</td>
+                    <td>{{ c['student_name'] }}</td>
+                    <td>{{ c['course'] }}</td>
+                    <td>{{ c['issue_date'] }}</td>
+                    <td>{{ c['status'] }}</td>
+                    <td>
+                        {% if c['status'] == 'ACTIVE' %}
+                        <form
+                            action="{{ url_for('revoke_certificate',
+                                      certificate_id=c['certificate_id']) }}"
+                            method="POST">
+                            <input type="hidden" name="csrf_token"
+                                   value="{{ csrf_token() }}">
+                            <button type="submit" class="danger">
+                                Revoke
+                            </button>
+                        </form>
+                        {% else %}
+                            Revoked
+                        {% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">No certificates issued yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>
